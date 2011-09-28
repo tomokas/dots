@@ -44,3 +44,12 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
 match OverLength '\%81v.*'
 
+call pathogen#infect()
+
+if has("gui_running")
+    highlight SpellBad term=underline gui=undercurl guisp=Orange
+endif
+
+" Status line
+set laststatus=2
+set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#statusline()}
