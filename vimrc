@@ -35,10 +35,6 @@ set autoindent
 " Misc
 set autochdir
 
-" Plugins
-" Toggle NERDTree
-"nmap <silent> <C-D> :NERDTreeToggle<CR>
-
 autocmd BufWritePre *.py :%s/\s\+$//e
 
 highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
