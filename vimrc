@@ -46,6 +46,10 @@ if has("gui_running")
     highlight SpellBad term=underline gui=undercurl guisp=Orange
 endif
 
+" Don't litter the working dir with swapfiles
+set backupdir=.backup,/tmp,.
+set directory=.backup,/tmp,.
+
 " Status line
 set laststatus=2
 set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#statusline()}
