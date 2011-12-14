@@ -35,7 +35,7 @@ set autoindent
 " Misc
 set autochdir
 
-autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
 match OverLength '\%81v.*'
