@@ -53,6 +53,13 @@ let g:indent_guides_color_change_percent = 2
 
 nnoremap <F5> :GundoToggle<CR>
 
+" Unbind the cursor keys in insert, normal and visual modes.
+for prefix in ['i', 'n', 'v']
+  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+    exe prefix . "noremap " . key . " <Nop>"
+  endfor
+endfor
+
 " Misc
 set autochdir
 
