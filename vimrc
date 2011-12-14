@@ -34,6 +34,23 @@ autocmd FileType html set tabstop=2|set shiftwidth=2|set expandtab|set softtabst
 autocmd FileType htmldjango set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 
+" Vundle Stuff
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kevinw/pyflakes-vim'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'sjl/gundo.vim'
+Bundle 'henrik/vim-indexed-search'
+Bundle 'EasyMotion'
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 2
+
 " Misc
 set autochdir
 
@@ -41,8 +58,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
 match OverLength '\%81v.*'
-
-call pathogen#infect()
 
 if has("gui_running")
     highlight SpellBad term=underline gui=undercurl guisp=Orange
