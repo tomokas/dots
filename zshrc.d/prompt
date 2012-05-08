@@ -1,0 +1,15 @@
+autoload -U colors && colors
+autoload -Uz vcs_info
+setopt PROMPT_SUBST
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "%{$fg_bold[blue]%}git:[%{$fg_bold[red]%}%b%{$fg_bold[blue]%}]"
+
+precmd() {
+	vcs_info
+
+	# tao@host
+	PROMPT="%{$fg_bold[green]%}%n@%B%M%b"
+
+	PROMPT="${PROMPT} %{$fg_bold[red]%}➜ %{$fg[yellow]%}%c ${vcs_info_msg_0_} %{$reset_color%}"
+}

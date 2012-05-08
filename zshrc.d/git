@@ -1,0 +1,12 @@
+alias gai="git add -i"
+alias gap="git add -p"
+alias gdc="git diff --cached"
+alias gd="git diff"
+alias gdw="git diff --word-diff"
+alias gs="git status"
+alias gl="git log --graph --all --pretty=format:'%Cred%h%Creset - %Cgreen(%cr)%Creset %s%C(yellow)%d%Creset' --abbrev-commit --date=relative"
+gcm() {
+    git commit -m "$@"
+}
+alias gpr="git pull --rebase"
+alias gpu="git push"

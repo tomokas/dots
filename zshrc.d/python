@@ -1,0 +1,2 @@
+alias syntax="git ls-files | grep py\$ | xargs py_compilefiles"
+alias rmpycs="find . -regex '.*?pyc$' -exec rm '{}' \;"
