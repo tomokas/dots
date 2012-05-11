@@ -30,11 +30,12 @@ set incsearch
 
 " Spacing
 filetype plugin indent on
-set autoindent smartindent
+set autoindent
 autocmd FileType python set tabstop=4 shiftwidth=4|set expandtab|set softtabstop=4|set listchars=tab:>-,trail:_ list
 autocmd FileType html set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 autocmd FileType htmldjango set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
+set nosmartindent
 
 " Vundle Stuff
 set rtp+=~/.vim/bundle/vundle/
