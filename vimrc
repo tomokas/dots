@@ -56,11 +56,19 @@ let g:indent_guides_color_change_percent = 2
 
 nnoremap <F5> :GundoToggle<CR>
 
-" Unbind the cursor keys in insert, normal and visual modes.
 for prefix in ['i', 'n', 'v']
+  " Unbind the cursor keys in insert, normal and visual modes.
   for key in ['<Up>', '<Down>', '<Left>', '<Right>']
     exe prefix . "noremap " . key . " <Nop>"
   endfor
+
+endfor
+
+" Ctrl+hjkl to move between splits
+for key in ['h', 'j', 'k', 'l']
+  " Move out of insert mode when switching splits
+  exe "imap <c-" . key . "> <Esc><c-w>" . key
+  exe "map <c-" . key . "> <c-w>" . key
 endfor
 
 " Misc
