@@ -6,6 +6,7 @@ set backspace=start,indent,eol
 
 " w sees underscore as a delimiter
 set iskeyword-=_
+set iskeyword-=-
 set iskeyword-=.
 
 " Interface
