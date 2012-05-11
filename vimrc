@@ -48,6 +48,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'sjl/gundo.vim'
 Bundle 'henrik/vim-indexed-search'
 Bundle 'EasyMotion'
+Bundle 'python.vim'
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
