@@ -20,6 +20,7 @@ colorscheme monokai
 filetype plugin on
 set showbreak=>>\ 
 set showmatch
+set nostartofline
 
 " Search
 set ignorecase 
