@@ -49,7 +49,7 @@ Bundle 'henrik/vim-indexed-search'
 Bundle 'EasyMotion'
 Bundle 'python.vim'
 " pip install flake8
-Bundle 'nvie/vim-flake8'
+Bundle 'scrooloose/syntastic.git'
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
@@ -92,3 +92,12 @@ set directory=.backup,/tmp,.
 " Status line
 set laststatus=2
 set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#statusline()}
+
+" Python syntastic
+let g:syntastic_check_on_open=1
+let g:syntastic_python_checker_args='--ignore=E302,E701'
+let g:syntastic_mode_map = {
+    \ 'mode': 'active',
+    \ 'active_filetypes': ['python'],
+    \ 'passive_filetypes': [],
+\}
