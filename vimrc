@@ -18,15 +18,15 @@ set showcmd
 set showmode
 colorscheme monokai
 filetype plugin on
-set showbreak=>>\ 
+set showbreak=>>\
 set showmatch
 set nostartofline
 
 " Search
-set ignorecase 
-set smartcase  
-set hlsearch   
-set incsearch  
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
 
 " Spacing
 filetype plugin indent on
