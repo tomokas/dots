@@ -1,5 +1,6 @@
 alias gai="git add -i"
 alias gap="git add -p"
+alias gpa=gap
 alias gdc="git diff --cached"
 alias gd="git diff"
 alias gdw="git diff --word-diff"
