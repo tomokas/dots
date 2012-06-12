@@ -3,4 +3,3 @@ alias ll="ls -l --group-directories-first"
 
 alias ..="cd .."
 alias ...="cd ../.."
-
