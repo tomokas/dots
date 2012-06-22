@@ -75,6 +75,7 @@ endfor
 
 " Misc
 set autochdir
+set scrolloff=10
 
 autocmd BufWritePre * :%s/\s\+$//e
 
