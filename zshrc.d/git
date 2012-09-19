@@ -9,5 +9,6 @@ alias gl="git log --graph --all --pretty=format:'%Cred%h%Creset - %Cgreen(%cr)%C
 gcm() {
     git commit -m "$@"
 }
+alias gca="git commit --amend"
 alias gpr="git pull --rebase"
 alias gpu="git push"
