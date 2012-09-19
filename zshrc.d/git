@@ -12,3 +12,4 @@ gcm() {
 alias gca="git commit --amend"
 alias gpr="git pull --rebase"
 alias gpu="git push"
+alias grhh="git reset --hard HEAD"
