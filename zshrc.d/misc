@@ -1,4 +1,4 @@
-alias gi="grep -iIrn"
+alias a="ack-grep -ia"
 alias ll="ls -l --group-directories-first"
 
 alias ..="cd .."
