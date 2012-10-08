@@ -1,4 +1,4 @@
-alias a="ack-grep -ia"
+alias a="ack-grep -a --smart-case"
 alias ll="ls -l --group-directories-first"
 
 alias ..="cd .."
