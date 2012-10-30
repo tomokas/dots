@@ -255,9 +255,9 @@ globalkeys = awful.util.table.join(
               end),
 
     -- Volume
-    awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 5%-") end),
-    awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 5%+") end),
-    awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -q sset Master toggle") end)
+    awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 5%-", false) end),
+    awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 5%+", false) end),
+    awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -q sset Master toggle", false) end)
 )
 
 clientkeys = awful.util.table.join(
