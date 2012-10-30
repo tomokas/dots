@@ -4,6 +4,9 @@ set nocompatible
 " Proper backspace
 set backspace=start,indent,eol
 
+" Disable toobar in gvim
+set guioptions-=T
+
 " w sees underscore as a delimiter
 set iskeyword-=_
 set iskeyword-=-
