@@ -1,13 +1,2 @@
-alias luigi="ssh luigi.playfire.com"
-alias goomba="ssh -t goomba.playfire.com \"cd /srv/www.playfire.com/ ; bash\""
-alias koopa="ssh -t koopa.playfire.com \"cd /srv/www.playfire.com/ ; bash\""
-alias yoshi="ssh -t yoshi.playfire.com \"cd /srv/www.playfire.com/ ; bash\""
-alias toodles="ssh -t toodles.playfire.com \"cd /srv/www.playfire.com/ ; bash\""
-alias hayzee="ssh -t hayzee.playfire.com \"cd /srv/www.playfire.com/ ; bash\""
-alias jellybob="ssh -t jellybob.playfire.com \"cd /srv/www.playfire.com/ ; bash\""
-alias kitty="ssh -t kitty.playfire.com \"cd /srv/www.playfire.com/ ; bash\""
-
-alias mssh-release="mssh {koopa,yoshi,birdo,goomba,hayzee,jellybob,kitty,sammi,raspberry,toodles,treacle}.playfire.com"
-
-alias sp="/home/tao/playfire/g4mer/manage.py shell_plus"
-alias dbs="/home/tao/playfire/g4mer/manage.py dbshell"
+alias sp="/home/tom/styleme/styleme/manage.py shell_plus"
+alias dbs="/home/tom/styleme/styleme/manage.py dbshell"
