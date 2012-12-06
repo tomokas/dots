@@ -108,3 +108,34 @@ let g:syntastic_mode_map = {
     \ 'active_filetypes': ['python'],
     \ 'passive_filetypes': [],
 \}
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabLongestHighlight = 0
+let g:jedi#popup_on_dot = 0
+
+if !has('python')
+    echo "Error: Need +python for PYTHONPATH modifications"
+    finish
+endif
+
+py << EOF
+import os
+import os.path
+
+paths = ":".join([
+    x for x in
+    (
+        '/home/tom/styleme/contrib',
+        '/home/tom/styleme/styleme',
+    )
+    if os.path.exists(x)
+])
+
+if 'PYTHONPATH' in os.environ:
+    os.environ['PYTHONPATH'] = u"%s:%s" % (paths, os.environ['PYTHONPATH'])
+else:
+    os.environ['PYTHONPATH'] = paths
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'styleme.settings')
+EOF
