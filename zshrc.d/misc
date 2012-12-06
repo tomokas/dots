@@ -6,3 +6,21 @@ alias ...="cd ../.."
 alias ....="cd ../../../"
 
 alias j="python -mjson.tool"
+
+shot() {
+    mkdir -p ~/screenshots
+
+    printf "Taking screenshot in "
+
+    TIME=3
+    while [ ${TIME} -gt 0 ]
+    do
+        printf "%d " ${TIME}
+        sleep 1
+        TIME=$((TIME - 1))
+    done
+
+    echo
+
+    scrot -s -e 'mv $f ~/screenshots/; echo $f'
+}
