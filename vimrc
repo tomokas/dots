@@ -53,6 +53,9 @@ Bundle 'EasyMotion'
 Bundle 'python.vim'
 " pip install flake8
 Bundle 'scrooloose/syntastic.git'
+Bundle 'lambdalisue/vim-django-support'
+Bundle 'ervandew/supertab'
+Bundle 'davidhalter/jedi-vim'
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
