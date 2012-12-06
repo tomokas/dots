@@ -3,5 +3,6 @@ alias ll="ls -l --group-directories-first"
 
 alias ..="cd .."
 alias ...="cd ../.."
+alias ....="cd ../../../"
 
 alias j="python -mjson.tool"
