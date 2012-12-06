@@ -7,10 +7,11 @@ set backspace=start,indent,eol
 " Disable toobar in gvim
 set guioptions-=T
 
-" w sees underscore as a delimiter
-set iskeyword-=_
-set iskeyword-=-
-set iskeyword-=.
+" Tab complete won't register underscore/hyphen/dot separated words as a full
+" completion options if these are set. Not good.
+" set iskeyword-=_
+" set iskeyword-=-
+" set iskeyword-=.
 
 " Interface
 syntax enable
