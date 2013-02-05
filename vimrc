@@ -84,8 +84,6 @@ endfor
 set autochdir
 set scrolloff=10
 
-autocmd BufWritePre * :%s/\s\+$//e
-
 highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
 match OverLength '\%81v.*'
 
