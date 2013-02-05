@@ -24,3 +24,5 @@ shot() {
 
     scrot -s -e 'mv $f ~/screenshots/; echo $f'
 }
+
+alias ifc="/sbin/ifconfig"
