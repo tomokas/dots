@@ -107,7 +107,7 @@ let g:syntastic_python_checker_args='--ignore=E302,E701'
 let g:syntastic_mode_map = {
     \ 'mode': 'active',
     \ 'active_filetypes': ['python'],
-    \ 'passive_filetypes': [],
+    \ 'passive_filetypes': ['html'],
 \}
 
 let g:SuperTabDefaultCompletionType = "context"
