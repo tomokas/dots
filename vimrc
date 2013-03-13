@@ -25,6 +25,7 @@ filetype plugin on
 set showbreak=>>\
 set showmatch
 set nostartofline
+set tabpagemax=100
 
 " Search
 set ignorecase
