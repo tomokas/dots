@@ -20,7 +20,7 @@ set number
 set ruler
 set showcmd
 set showmode
-colorscheme monokai
+colorscheme Monokai-Refined
 filetype plugin on
 set showbreak=>>\
 set showmatch
