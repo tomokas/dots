@@ -26,3 +26,7 @@ shot() {
 }
 
 alias ifc="/sbin/ifconfig"
+
+v() {
+    gvim -p `ack-grep -a -l --smart-case "${*}"`
+}
