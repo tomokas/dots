@@ -12,12 +12,9 @@ gcm() {
 alias gca="git commit --amend"
 alias gpr="git pull --rebase"
 gpu() {
-    if [ -x "./manage.py" ]
-    then
-        find . -name "*.pyc" -delete
-        ./manage.py test --failfast "${@}" || return ${?}
-        ./manage.py lint
-    fi
+    git rmpycs
+    git testff "${@}" || return ${?}
+    git lint
     git push
 }
 alias grhh="git reset --hard HEAD"
