@@ -25,3 +25,4 @@ alias gl1u="git log -1 -u"
 
 git config --global alias.rmpycs '!find . -name "*.pyc" -delete'
 git config --global alias.test '!`find -maxdepth 2 -name manage.py` test'
+git config --global alias.lint '!`find -maxdepth 2 -name manage.py` lint'
