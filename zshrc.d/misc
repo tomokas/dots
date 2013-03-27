@@ -10,19 +10,16 @@ alias j="python -mjson.tool"
 shot() {
     mkdir -p ~/screenshots
 
-    printf "Taking screenshot in "
-
-    TIME=3
-    while [ ${TIME} -gt 0 ]
-    do
-        printf "%d " ${TIME}
-        sleep 1
-        TIME=$((TIME - 1))
-    done
-
-    echo
+    printf "Select a window/rectangle\n"
 
     scrot -s -e 'mv $f ~/screenshots/; echo $f'
+}
+tshot() {
+    mkdir -p ~/screenshots
+
+    printf "Taking screenshot\n"
+
+    scrot -c -d3 -s -e 'mv $f ~/screenshots/; echo $f'
 }
 
 alias ifc="/sbin/ifconfig"
