@@ -21,3 +21,4 @@ gpu() {
     git push
 }
 alias grhh="git reset --hard HEAD"
+alias gl1u="git log -1 -u"
