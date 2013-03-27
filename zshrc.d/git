@@ -22,3 +22,5 @@ gpu() {
 }
 alias grhh="git reset --hard HEAD"
 alias gl1u="git log -1 -u"
+
+git config --global alias.test '!`find -maxdepth 2 -name manage.py` test'
