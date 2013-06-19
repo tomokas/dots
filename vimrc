@@ -102,7 +102,7 @@ set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#stat
 
 " Python syntastic
 let g:syntastic_check_on_open=1
-let g:syntastic_python_flake8_args='--ignore=E302,E701,E261'
+let g:syntastic_python_flake8_args='--ignore=E302,E701,E261,E127,E128'
 
 let g:syntastic_mode_map = {
     \ 'mode': 'active',
