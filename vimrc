@@ -101,6 +101,21 @@ set directory=.backup,/tmp,.
 set laststatus=2
 set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#statusline()}
 
+function! ReflowArgs (text)
+    let mx = '^\( *\)\(.*\)(\(.*\))$'
+    let l = matchstr(a:text, mx)
+
+    let spacing = substitute(l, mx, '\1', '')
+    let fname = substitute(l, mx, '\2', '')
+    let params_raw = substitute(substitute(l, mx, '\3', ''), ' ', '', 'g')
+
+    let params = join(map(split(params_raw, ","), 'spacing . "    " . v:val . ","'), "\r")
+
+    return spacing . fname . "(\r" . params . "\r" . spacing . ")"
+endfunction
+
+nnoremap <leader>s :.,.s/.*/\=ReflowArgs(submatch(0))/g<CR>:noh<CR>
+
 " Python syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_python_flake8_args='--ignore=E302,E701,E261,E127,E128'
