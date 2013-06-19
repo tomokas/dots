@@ -1,2 +1,5 @@
+alias sm="/home/tom/styleme/styleme"
+alias smt="/home/tom/styleme/templates"
+alias smm="/home/tom/styleme/media"
 alias sp="/home/tom/styleme/styleme/manage.py shell_plus"
 alias dbs="/home/tom/styleme/styleme/manage.py dbshell"
