@@ -12,3 +12,9 @@ alias m="${STYLEME}/styleme/manage.py"
 
 alias s="m shell"
 alias dbs="m dbshell"
+
+
+for MACHINE in burberry ford galliano hackett mcqueen conran westwood sander
+do
+    alias ${MACHINE}="ssh tom@${MACHINE}.adm.thread.com"
+done
