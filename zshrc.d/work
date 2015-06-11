@@ -1,5 +1,14 @@
-alias sm="/home/tom/styleme/styleme"
-alias smt="/home/tom/styleme/templates"
-alias smm="/home/tom/styleme/media"
-alias sp="/home/tom/styleme/styleme/manage.py shell_plus"
-alias dbs="/home/tom/styleme/styleme/manage.py dbshell"
+DEV="/home/tom/dev"
+STYLEME="${DEV}/styleme"
+
+alias dev="${DEV}"
+
+alias sm="${STYLEME}/styleme"
+alias smt="${STYLEME}/templates"
+alias smm="${STYLEME}/media"
+alias smc="${STYLEME}/contrib"
+
+alias m="${STYLEME}/styleme/manage.py"
+
+alias s="m shell"
+alias dbs="m dbshell"
