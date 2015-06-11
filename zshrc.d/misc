@@ -31,3 +31,10 @@ alias ifc="/sbin/ifconfig"
 v() {
     gvim -p `ack-grep -a -l --smart-case "${*}"`
 }
+
+vf() {
+    local NAME="${1}"
+    shift
+
+    find -name "${NAME}" | xargs ack-grep --smart-case "${@}"
+}
