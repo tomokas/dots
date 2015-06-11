@@ -1,5 +1,9 @@
-alias a="ack-grep -a --smart-case"
+alias a="ack-grep --skipped --text --smart-case"
+alias am="a --ignore-dir=\"migrations\""
+alias ls="ls --color"
 alias ll="ls -l --group-directories-first"
+alias f="find -name"
+alias gv="gvim --remote-tab"
 
 alias ..="cd .."
 alias ...="cd ../.."
