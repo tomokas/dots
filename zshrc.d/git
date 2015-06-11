@@ -18,6 +18,7 @@ gpu() {
 }
 alias grhh="git reset --hard HEAD"
 alias gl1u="git log -1 -u"
+alias gco="git checkout"
 
 git config --global alias.rmpycs '!find . -name "*.pyc" -delete'
 git config --global alias.test '!`find -maxdepth 2 -name manage.py` test'
