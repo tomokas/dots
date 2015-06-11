@@ -14,7 +14,6 @@ alias gpr="git pull --rebase"
 gpu() {
     git rmpycs
     git testff "${@}" || return ${?}
-    git lint
     git push
 }
 alias grhh="git reset --hard HEAD"
