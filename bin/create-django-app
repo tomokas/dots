@@ -32,10 +32,12 @@ class SmokeTest(TestCase):
 """
 
 URLS_PY = """
-from django.conf.urls import patterns, url
+from django.conf.urls import url, include
 
-urlpatterns = patterns('%(fullpath)s.views',
-    url(r'^%(url)s$', 'view',
+from . import views
+
+urlpatterns = (
+    url(r'^%(url)s$', views.view,
         name='view'),
 )
 """
