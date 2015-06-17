@@ -52,16 +52,18 @@ I: * Add url include:
 I:     (r'', include('%(fullpath)s.urls', namespace='%(url_namespace)s')),
 """
 
-def main(fullpath):
-    app = fullpath.rsplit('.', 1)[1]
-    project = fullpath.split('.')[0]
+def main(project, relative_app_path):
+    app = relative_app_path.rsplit('.', 1)[1]
+    fullpath = '.'.join((project, relative_app_path))
 
     stripped = []
-    for x in fullpath.split('.')[1:]:
+    for x in relative_app_path.split('.'):
         for y in stripped:
             if x.startswith('%s_' % y):
                 x = x[len(y) + 1:]
         stripped.append(x)
+
+    app_path = os.path.join(*stripped)
 
     c = {
         'app': app,
@@ -74,21 +76,17 @@ def main(fullpath):
         'template_path': '/'.join(stripped),
     }
 
-    if app == fullpath:
-        print "E: Please specify a full app path (eg. myproject.myapp)"
-        return 1
-
-    if os.path.exists(app):
+    if os.path.exists(app_path):
         print "E: %(app)s/ dir already exists" % c
         return 1
 
-    os.makedirs(app)
+    os.makedirs(app_path)
 
-    template(os.path.join(app, '__init__.py'), INIT_PY, c)
-    template(os.path.join(app, 'urls.py'), URLS_PY, c)
-    template(os.path.join(app, 'tests.py'), TESTS_PY, c)
-    template(os.path.join(app, 'views.py'), VIEWS_PY, c)
-    template(os.path.join(app, 'models.py'), MODELS_PY, c)
+    template(os.path.join(app_path, '__init__.py'), INIT_PY, c)
+    template(os.path.join(app_path, 'urls.py'), URLS_PY, c)
+    template(os.path.join(app_path, 'tests.py'), TESTS_PY, c)
+    template(os.path.join(app_path, 'views.py'), VIEWS_PY, c)
+    template(os.path.join(app_path, 'models.py'), MODELS_PY, c)
 
     print SUCCESS.strip() % c
 
