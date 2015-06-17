@@ -42,30 +42,7 @@ urlpatterns = (
 )
 """
 
-INIT_PY = """
-default_app_config = '%(fullpath)s.%(app_title)sConfig'
-"""
-
-APPS_PY = """
-from django.apps import AppConfig
-
-class %(app_title)sConfig(AppConfig):
-    name = '%(fullpath)s'
-
-    def ready(self):
-        from . import checks # NOQA
-"""
-
-CHECKS_PY = """
-from django.core import checks
-
-@checks.register()
-def dummy_check(app_configs, **kwargs):
-    yield checks.Error(
-        "Check failed",
-        id='%(fullpath)s.E001',
-    )
-"""
+INIT_PY = ""
 
 SUCCESS = """
 I: Created %(app)s app. Missing:
@@ -108,11 +85,9 @@ def main(fullpath):
     os.makedirs(app)
 
     template(os.path.join(app, '__init__.py'), INIT_PY, c)
-    template(os.path.join(app, 'apps.py'), APPS_PY, c)
     template(os.path.join(app, 'urls.py'), URLS_PY, c)
     template(os.path.join(app, 'tests.py'), TESTS_PY, c)
     template(os.path.join(app, 'views.py'), VIEWS_PY, c)
-    template(os.path.join(app, 'checks.py'), CHECKS_PY, c)
     template(os.path.join(app, 'models.py'), MODELS_PY, c)
 
     print SUCCESS.strip() % c
