@@ -1,0 +1,127 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+MODELS_PY = """
+import datetime
+
+from django.db import models
+"""
+
+VIEWS_PY = """
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def view(request):
+    return render(request, '%(template_path)s/view.html', {
+    })
+"""
+
+TESTS_PY = """
+from %(project)s.utils.test import TestCase
+
+class SmokeTest(TestCase):
+    def setUp(self):
+        super(SmokeTest, self).setUp()
+
+    def test_view(self):
+        self.assertHTTP200('%(url_path)s:view')
+"""
+
+URLS_PY = """
+from django.conf.urls import patterns, url
+
+urlpatterns = patterns('%(fullpath)s.views',
+    url(r'^%(url)s$', 'view',
+        name='view'),
+)
+"""
+
+INIT_PY = """
+default_app_config = '%(fullpath)s.%(app_title)sConfig'
+"""
+
+APPS_PY = """
+from django.apps import AppConfig
+
+class %(app_title)sConfig(AppConfig):
+    name = '%(fullpath)s'
+
+    def ready(self):
+        from . import checks # NOQA
+"""
+
+CHECKS_PY = """
+from django.core import checks
+
+@checks.register()
+def dummy_check(app_configs, **kwargs):
+    yield checks.Error(
+        "Check failed",
+        id='%(fullpath)s.E001',
+    )
+"""
+
+SUCCESS = """
+I: Created %(app)s app. Missing:
+I:
+I: * Add '%(fullpath)s', to INSTALLED_APPS
+I: * Add url include:
+I:     (r'', include('%(fullpath)s.urls', namespace='%(url_namespace)s')),
+"""
+
+def main(fullpath):
+    app = fullpath.rsplit('.', 1)[1]
+    project = fullpath.split('.')[0]
+
+    stripped = []
+    for x in fullpath.split('.')[1:]:
+        for y in stripped:
+            if x.startswith('%s_' % y):
+                x = x[len(y) + 1:]
+        stripped.append(x)
+
+    c = {
+        'app': app,
+        'app_title': app.title(),
+        'url': '/'.join(x.replace('_', '/') for x in stripped),
+        'project': project,
+        'fullpath': fullpath,
+        'url_path': ':'.join(x.replace('_', '-') for x in stripped),
+        'url_namespace': stripped[-1].replace('_', '-'),
+        'template_path': '/'.join(stripped),
+    }
+
+    if app == fullpath:
+        print "E: Please specify a full app path (eg. myproject.myapp)"
+        return 1
+
+    if os.path.exists(app):
+        print "E: %(app)s/ dir already exists" % c
+        return 1
+
+    os.makedirs(app)
+
+    template(os.path.join(app, '__init__.py'), INIT_PY, c)
+    template(os.path.join(app, 'apps.py'), APPS_PY, c)
+    template(os.path.join(app, 'urls.py'), URLS_PY, c)
+    template(os.path.join(app, 'tests.py'), TESTS_PY, c)
+    template(os.path.join(app, 'views.py'), VIEWS_PY, c)
+    template(os.path.join(app, 'checks.py'), CHECKS_PY, c)
+    template(os.path.join(app, 'models.py'), MODELS_PY, c)
+
+    print SUCCESS.strip() % c
+
+    return 0
+
+def template(filename, source, context):
+    contents = source.strip() % context
+
+    with open(filename, 'w') as f:
+        f.write(contents)
+
+if __name__ == '__main__':
+    sys.exit(main(*sys.argv[1:]))
