@@ -14,7 +14,7 @@ alias s="m shell"
 alias dbs="m dbshell"
 
 
-for MACHINE in burberry ford galliano hackett mcqueen conran westwood sander
+for MACHINE in burberry ford galliano hackett mcqueen conran westwood sander hare smith prada beckham everest richmond spencer simons anderson lanvin bailey ashley
 do
     alias ${MACHINE}="ssh tom@${MACHINE}.adm.thread.com"
 done
