@@ -21,6 +21,6 @@ alias gl1u="git log -1 -u"
 alias gco="git checkout"
 
 git config --global alias.rmpycs '!find . -name "*.pyc" -delete'
-git config --global alias.test '!`find -maxdepth 2 -name manage.py` test'
-git config --global alias.testff '!`find -maxdepth 2 -name manage.py` test --failfast'
+git config --global alias.test '!`find -maxdepth 2 -name manage.py` test --parallel=8'
+git config --global alias.testff '!`find -maxdepth 2 -name manage.py` test --parallel=8 --failfast'
 git config --global alias.lint '!`find -maxdepth 2 -name manage.py` lint'
