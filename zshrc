@@ -66,3 +66,5 @@ do
 done
 
 source /usr/local/bin/virtualenvwrapper.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
