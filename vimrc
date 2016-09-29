@@ -1,17 +1,31 @@
-" Don't emulate vi
-set nocompatible
+" Unbind the cursor keys in insert, normal and visual modes.
+for prefix in ['i', 'n', 'v']
+  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+    exe prefix . "noremap " . key . " <Nop>"
+  endfor
+endfor
 
-" Proper backspace
+" Ctrl+hjkl to move between splits
+for key in ['h', 'j', 'k', 'l']
+  " Move out of insert mode when switching splits
+  exe "imap <c-" . key . "> <Esc><c-w>" . key
+  exe "map <c-" . key . "> <c-w>" . key
+endfor
+
+let mapleader = ','
+
+set nocompatible
+set autochdir
+set scrolloff=10
+set wildmenu
+set wildmode=list:longest,full
+set showcmd
+set colorcolumn=80
+
 set backspace=start,indent,eol
 
 " Disable toobar in gvim
 set guioptions-=T
-
-" Tab complete won't register underscore/hyphen/dot separated words as a full
-" completion options if these are set. Not good.
-" set iskeyword-=_
-" set iskeyword-=-
-" set iskeyword-=.
 
 " Interface
 syntax enable
@@ -20,12 +34,11 @@ set number
 set ruler
 set showcmd
 set showmode
-colorscheme Monokai-Refined
-filetype plugin on
 set showbreak=>>\
 set showmatch
 set nostartofline
 set tabpagemax=100
+set laststatus=2
 
 " Search
 set ignorecase
@@ -40,67 +53,123 @@ autocmd FileType python set tabstop=4 shiftwidth=4|set expandtab|set softtabstop
 autocmd FileType html set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 autocmd FileType htmldjango set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
+autocmd FileType css set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
+autocmd FileType scss set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 set nosmartindent
 
-" Vundle Stuff
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+colorscheme Monokai-Refined
 
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'sjl/gundo.vim'
-Bundle 'henrik/vim-indexed-search'
-Bundle 'EasyMotion'
-Bundle 'python.vim'
-" pip install flake8
-Bundle 'scrooloose/syntastic.git'
-Bundle 'lambdalisue/vim-django-support'
-Bundle 'ervandew/supertab'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+if has("gui_running")
+    highlight SpellBad term=underline gui=undercurl guisp=Orange
+endif
+
+" Swapfiles not in working directory
+set backupdir=.backup,/tmp,.
+set directory=.backup,/tmp,.
+
+
+
+
+" Plugins
+" -------
+
+call plug#begin('~/.vim/plugged')
+Plug 'sjl/gundo.vim'
+
+nnoremap <F5> :GundoToggle<CR>
+
+
+" Indent guides
+Plug 'nathanaelkane/vim-indent-guides'
 
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_color_change_percent = 2
 
-nnoremap <F5> :GundoToggle<CR>
 
-for prefix in ['i', 'n', 'v']
-  " Unbind the cursor keys in insert, normal and visual modes.
-  for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-    exe prefix . "noremap " . key . " <Nop>"
-  endfor
+" Search pulse
+Plug 'inside/vim-search-pulse'
 
-endfor
+let g:vim_search_pulse_mode = 'pattern'
 
-" Ctrl+hjkl to move between splits
-for key in ['h', 'j', 'k', 'l']
-  " Move out of insert mode when switching splits
-  exe "imap <c-" . key . "> <Esc><c-w>" . key
-  exe "map <c-" . key . "> <c-w>" . key
-endfor
 
-" Misc
-set autochdir
-set scrolloff=10
+" Fugitive
+Plug 'tpope/vim-fugitive'
 
-highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-match OverLength '\%81v.*'
-
-if has("gui_running")
-    highlight SpellBad term=underline gui=undercurl guisp=Orange
-endif
-
-" Don't litter the working dir with swapfiles
-set backupdir=.backup,/tmp,.
-set directory=.backup,/tmp,.
-
-" Status line
-set laststatus=2
 set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#statusline()}
 
+
+" Easymotion
+Plug 'Lokaltog/vim-easymotion'
+
+map <Leader> <Plug>(easymotion-prefix)
+map <Leader>w <Plug>(easymotion-bd-w)
+
+
+" Syntastic
+Plug 'scrooloose/syntastic' " pip install flake8
+
+let g:syntastic_check_on_open=1
+let g:syntastic_python_flake8_args='--ignore=E302,E701,E261,E127,E128'
+let g:syntastic_mode_map = {
+    \ 'mode': 'active',
+    \ 'active_filetypes': ['python'],
+    \ 'passive_filetypes': ['html'],
+\}
+
+
+" Supertab
+Plug 'ervandew/supertab'
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabLongestHighlight = 0
+
+
+" Jedi
+Plug 'davidhalter/jedi-vim'
+
+let g:jedi#popup_on_dot = 0
+
+
+" Plugs without configurations
+Plug 'vim-scripts/python.vim'
+Plug 'henrik/vim-indexed-search'
+Plug 'jaromero/vim-monokai-refined'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+
+" For FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+
+function! FZFGit()
+    " Remove trailing new line to make it work with tmux splits
+    let directory = substitute(system('git rev-parse --show-toplevel'), '\n$', '', '')
+    if !v:shell_error
+        lcd `=directory`
+        call fzf#run({
+            \ 'dir': directory,
+            \ 'down': '40%'
+            \ })
+    else
+        FZF
+    endif
+endfunction
+command! FZFGit call FZFGit()
+
+map <c-p> :FZF ~/dev/styleme/<cr>
+map <c-o> :FZF ~/dev/<cr>
+
+" let g:fzf_layout = {}
+
+" Custom functions
+" ----------------
 function! ReflowArgs (text)
     let mx = '^\( *\)\(.*\)(\(.*\))$'
     let l = matchstr(a:text, mx)
@@ -114,45 +183,4 @@ function! ReflowArgs (text)
     return spacing . fname . "(\r" . params . "\r" . spacing . ")"
 endfunction
 
-nnoremap <leader>s :.,.s/.*/\=ReflowArgs(submatch(0))/g<CR>:noh<CR>
-
-" Python syntastic
-let g:syntastic_check_on_open=1
-let g:syntastic_python_flake8_args='--ignore=E302,E701,E261,E127,E128'
-
-let g:syntastic_mode_map = {
-    \ 'mode': 'active',
-    \ 'active_filetypes': ['python'],
-    \ 'passive_filetypes': ['html'],
-\}
-
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabLongestHighlight = 0
-let g:jedi#popup_on_dot = 0
-
-if !has('python')
-    echo "Error: Need +python for PYTHONPATH modifications"
-    finish
-endif
-
-py << EOF
-import os
-import os.path
-
-paths = ":".join([
-    x for x in
-    (
-        '/home/tom/styleme/contrib',
-        '/home/tom/styleme/styleme',
-    )
-    if os.path.exists(x)
-])
-
-if 'PYTHONPATH' in os.environ:
-    os.environ['PYTHONPATH'] = u"%s:%s" % (paths, os.environ['PYTHONPATH'])
-else:
-    os.environ['PYTHONPATH'] = paths
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'styleme.settings')
-EOF
+map <leader>R :.,.s/.*/\=ReflowArgs(submatch(0))/g<CR>:noh<CR>
