@@ -15,15 +15,14 @@ shot() {
     mkdir -p ~/screenshots
 
     printf "Select a window/rectangle\n"
-
-    scrot -s -e 'mv $f ~/screenshots/; echo $f'
+    scrot -s -e '. ~/dots/zshrc.d/imgur ; mv $f ~/screenshots/; echo $f; echo "/home/tom/screenshots/$f"; imgur "/home/tom/screenshots/$f"'
 }
 tshot() {
     mkdir -p ~/screenshots
 
     printf "Taking screenshot\n"
 
-    scrot -c -d3 -s -e 'mv $f ~/screenshots/; echo $f'
+    scrot -c -d3 -s -e '. ~/dots/zshrc.d/imgur ; mv $f ~/screenshots/; echo "/home/tom/screenshots/$f"; imgur "/home/tom/screenshots/$f"'
 }
 
 alias ifc="/sbin/ifconfig"
