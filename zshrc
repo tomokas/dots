@@ -64,3 +64,5 @@ for FILE in ~/.zshrc.d/*
 do
 	. $FILE
 done
+
+source /usr/local/bin/virtualenvwrapper.sh
