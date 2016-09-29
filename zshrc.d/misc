@@ -37,3 +37,6 @@ vf() {
 
     find -name "${NAME}" | xargs ack-grep --smart-case "${@}"
 }
+va() {
+    gv $(a --files-with-matches "${1}" $(pwd))
+}
