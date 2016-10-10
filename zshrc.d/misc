@@ -3,7 +3,7 @@ alias am="a --ignore-dir=\"migrations\""
 alias ls="ls --color"
 alias ll="ls -l --group-directories-first"
 alias f="find -name"
-alias gv="gvim --remote-tab"
+alias gv="nvr --remote-tab"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -40,3 +40,5 @@ vf() {
 va() {
     gv $(a --files-with-matches "${1}" $(pwd))
 }
+
+alias n="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
