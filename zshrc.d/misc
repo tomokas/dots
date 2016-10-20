@@ -1,9 +1,15 @@
 alias a="ack-grep --smart-case"
 alias am="a --ignore-dir=\"migrations\""
 alias ls="ls --color"
-alias ll="ls -l --group-directories-first"
 alias f="find -name"
 alias gv="nvr --remote-tab"
+
+alias ll="ls -l"
+alias ll="ls -l --group-directories-first"
+
+if [ $(uname) != "Darwin" ]; then
+	alias ll="ls -l --group-directories-first"
+fi
 
 alias ..="cd .."
 alias ...="cd ../.."
