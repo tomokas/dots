@@ -65,6 +65,7 @@ do
 	. $FILE
 done
 
+export WORKON_HOME=~/envs
 source /usr/local/bin/virtualenvwrapper.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
