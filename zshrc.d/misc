@@ -47,4 +47,13 @@ va() {
     gv $(a --files-with-matches "${1}" $(pwd))
 }
 
-alias n="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
+n() {
+    export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+
+    if ! pgrep -x "nvim" > /dev/null
+    then
+        rm $NVIM_LISTEN_ADDRESS
+    fi
+
+    nvim
+}
