@@ -8,7 +8,7 @@ alias smt="${STYLEME}/templates"
 alias smm="${STYLEME}/media"
 alias smc="${STYLEME}/contrib"
 
-alias m="${STYLEME}/styleme/manage.py"
+alias m="workon styleme3; ${STYLEME}/styleme/manage.py"
 
 alias s="m shell"
 alias dbs="m dbshell"
