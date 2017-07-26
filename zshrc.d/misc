@@ -1,4 +1,4 @@
-alias a="ack-grep --smart-case"
+alias a="ack --smart-case"
 alias am="a --ignore-dir=\"migrations\""
 alias ls="ls --color"
 alias f="find -name"
