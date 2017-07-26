@@ -59,15 +59,9 @@ set nosmartindent
 
 colorscheme Monokai-Refined
 
-if has("gui_running")
-    highlight SpellBad term=underline gui=undercurl guisp=Orange
-endif
-
 " Swapfiles not in working directory
 set backupdir=.backup,/tmp,.
 set directory=.backup,/tmp,.
-
-
 
 
 " Plugins
@@ -75,64 +69,13 @@ set directory=.backup,/tmp,.
 
 call plug#begin('~/.vim/plugged')
 Plug 'sjl/gundo.vim'
-
-nnoremap <F5> :GundoToggle<CR>
-
-
-" Indent guides
 Plug 'nathanaelkane/vim-indent-guides'
-
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_color_change_percent = 2
-
-
-" Search pulse
 Plug 'inside/vim-search-pulse'
-
-let g:vim_search_pulse_mode = 'pattern'
-
-
-" Fugitive
 Plug 'tpope/vim-fugitive'
-
-set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#statusline()}
-
-
-" Easymotion
 Plug 'Lokaltog/vim-easymotion'
-
-map <Leader> <Plug>(easymotion-prefix)
-map <Leader>w <Plug>(easymotion-bd-w)
-
-
-" Syntastic
 Plug 'scrooloose/syntastic' " pip install flake8
-
-let g:syntastic_check_on_open=1
-let g:syntastic_python_flake8_args='--ignore=E302,E701,E261,E127,E128'
-let g:syntastic_mode_map = {
-    \ 'mode': 'active',
-    \ 'active_filetypes': ['python'],
-    \ 'passive_filetypes': ['html'],
-\}
-
-
-" Supertab
 Plug 'ervandew/supertab'
-
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabLongestHighlight = 0
-
-
-" Jedi
 Plug 'davidhalter/jedi-vim'
-
-let g:jedi#popup_on_dot = 0
-
-
 " Plugs without configurations
 Plug 'vim-scripts/python.vim'
 Plug 'henrik/vim-indexed-search'
@@ -144,7 +87,58 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Plug 'Shougo/neosnippet.vim'        " Snippets Engine
+" Plug 'Shougo/deoplete.nvim'         " Autocompletion Engine (neovim)
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
 call plug#end()
+
+nnoremap <F5> :GundoToggle<CR>
+
+" Indent guides
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+
+hi IndentGuidesOdd  ctermbg=235
+hi IndentGuidesEven ctermbg=236
+
+" Search pulse
+let g:vim_search_pulse_mode = 'pattern'
+
+
+" Fugitive
+set statusline=%F%m%r%h%w\ [%{&ff}]\ [%Y]\ [%01v,%01l/%L][%p%%]\ %{fugitive#statusline()}
+
+
+" Easymotion
+map <Leader> <Plug>(easymotion-prefix)
+map <Leader>w <Plug>(easymotion-bd-w)
+
+
+" Syntastic
+let g:syntastic_check_on_open=1
+let g:syntastic_python_flake8_args='--ignore=E701,E261,E127,E128'
+let g:syntastic_mode_map = {
+    \ 'mode': 'active',
+    \ 'active_filetypes': ['python'],
+    \ 'passive_filetypes': ['html'],
+\}
+
+
+" Supertab
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabLongestHighlight = 0
+
+
+" Jedi
+let g:jedi#popup_on_dot = 0
+
+
+" let g:deoplete#enable_at_startup = 1
 
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
