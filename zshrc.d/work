@@ -7,8 +7,11 @@ alias sm="${STYLEME}/styleme"
 alias smt="${STYLEME}/templates"
 alias smm="${STYLEME}/media"
 alias smc="${STYLEME}/contrib"
+alias smf="${STYLEME}/frontend"
 
-alias m="workon styleme3; ${STYLEME}/styleme/manage.py"
+alias m="workon styleme; ${STYLEME}/styleme/manage.py"
+alias mak="m makemigrations"
+alias mig="m migrate"
 
 alias s="m shell"
 alias dbs="m dbshell"
