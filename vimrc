@@ -57,7 +57,6 @@ autocmd FileType css set tabstop=2|set shiftwidth=2|set expandtab|set softtabsto
 autocmd FileType scss set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2|set listchars=tab:>-,trail:_ list
 set nosmartindent
 
-colorscheme Monokai-Refined
 
 " Swapfiles not in working directory
 set backupdir=.backup,/tmp,.
@@ -68,6 +67,7 @@ set directory=.backup,/tmp,.
 " -------
 
 call plug#begin('~/.vim/plugged')
+Plug 'crusoexia/vim-monokai'
 Plug 'sjl/gundo.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'inside/vim-search-pulse'
@@ -82,6 +82,7 @@ Plug 'henrik/vim-indexed-search'
 Plug 'jaromero/vim-monokai-refined'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'tell-k/vim-autoflake'
 
 " For FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -101,6 +102,8 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_auto_colors = 0
 
+colorscheme Monokai-Refined
+
 hi IndentGuidesOdd  ctermbg=235
 hi IndentGuidesEven ctermbg=236
 
@@ -118,11 +121,15 @@ map <Leader>w <Plug>(easymotion-bd-w)
 
 
 " Syntastic
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+let g:syntastic_python_checkers = ['flake8']
+
+
 let g:syntastic_check_on_open=1
 let g:syntastic_python_flake8_args='--ignore=E701,E261,E127,E128'
 let g:syntastic_mode_map = {
     \ 'mode': 'active',
-    \ 'active_filetypes': ['python'],
+    \ 'active_filetypes': ['python', 'jsx'],
     \ 'passive_filetypes': ['html'],
 \}
 
@@ -135,7 +142,10 @@ let g:SuperTabLongestHighlight = 0
 
 
 " Jedi
+let g:python_host_prog="/usr/bin/python3"
+let g:python3_host_prog="/usr/bin/python3"
 let g:jedi#popup_on_dot = 0
+"l et g:jedi#force_py_version = 3
 
 
 " let g:deoplete#enable_at_startup = 1
@@ -178,3 +188,8 @@ function! ReflowArgs (text)
 endfunction
 
 map <leader>R :.,.s/.*/\=ReflowArgs(submatch(0))/g<CR>:noh<CR>
+
+let g:autoflake_remove_all_unused_imports=1
+let g:autoflake_disable_show_diff=1
+
+set mouse=a
