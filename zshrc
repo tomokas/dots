@@ -75,7 +75,9 @@ do
 	. $FILE
 done
 
-export WORKON_HOME=~/envs
+PATH=$PATH:/home/tom/bin/:/home/tom/.local/bin
+
+export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
