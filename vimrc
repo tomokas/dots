@@ -70,17 +70,20 @@ set directory=.backup,/tmp,.
 
 " Plugins
 " -------
+let g:python3_host_prog = '/Users/tom/.pyenv/versions/neovim/bin/python'
+let g:python_host_prog = '/Users/tom/.pyenv/versions/neovim2/bin/python'
 
 call plug#begin('~/.vim/plugged')
-Plug 'crusoexia/vim-monokai'
 Plug 'sjl/gundo.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'inside/vim-search-pulse'
 Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'scrooloose/syntastic' " pip install flake8
-Plug 'ervandew/supertab'
-Plug 'davidhalter/jedi-vim'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+
 " Plugs without configurations
 Plug 'vim-scripts/python.vim'
 Plug 'henrik/vim-indexed-search'
@@ -90,14 +93,9 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tell-k/vim-autoflake'
 
 " For FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Plug 'Shougo/neosnippet.vim'        " Snippets Engine
-" Plug 'Shougo/deoplete.nvim'         " Autocompletion Engine (neovim)
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'Shougo/neosnippet'
-" Plug 'Shougo/neosnippet-snippets'
 call plug#end()
 
 nnoremap <F5> :GundoToggle<CR>
@@ -126,7 +124,6 @@ map <Leader>w <Plug>(easymotion-bd-w)
 
 
 " Syntastic
-let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['flake8']
 
 
@@ -138,22 +135,6 @@ let g:syntastic_mode_map = {
     \ 'passive_filetypes': ['html'],
 \}
 
-
-" Supertab
-
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabLongestHighlight = 0
-
-
-" Jedi
-let g:python_host_prog="/usr/bin/python3"
-let g:python3_host_prog="/usr/bin/python3"
-let g:jedi#popup_on_dot = 0
-"l et g:jedi#force_py_version = 3
-
-
-" let g:deoplete#enable_at_startup = 1
 
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
@@ -171,11 +152,6 @@ function! FZFGit()
     endif
 endfunction
 command! FZFGit call FZFGit()
-
-map <c-p> :FZF ~/dev/styleme/<cr>
-map <c-o> :FZF ~/dev/<cr>
-
-" let g:fzf_layout = {}
 
 " Custom functions
 " ----------------
@@ -198,3 +174,46 @@ let g:autoflake_remove_all_unused_imports=1
 let g:autoflake_disable_show_diff=1
 
 set mouse=a
+
+" Semshi
+let g:semshi#error_sign_delay = 1.0
+nmap <S-Tab> :Semshi goto name prev<CR>
+
+nmap <c-p> :FZF ~/dev/styleme/<cr>
+nmap <c-o> :FZF ~/dev/<cr>
+nmap <c-i> :FZFGit <cr>
+nmap <Tab> :Semshi goto name next<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
