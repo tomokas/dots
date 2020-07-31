@@ -4,6 +4,7 @@ for prefix in ['i', 'n', 'v']
     exe prefix . "noremap " . key . " <Nop>"
   endfor
 endfor
+tnoremap <Esc> <C-\><C-n>
 
 " Ctrl+hjkl to move between splits
 for key in ['h', 'j', 'k', 'l']
