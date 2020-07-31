@@ -13,6 +13,10 @@ for key in ['h', 'j', 'k', 'l']
   exe "map <c-" . key . "> <c-w>" . key
 endfor
 
+" Match up to iterm2 sending escape sequence
+nnoremap <F6> :tabprevious<CR>
+nnoremap <F7> :tabnext<CR>
+
 let mapleader = ','
 
 set nocompatible
