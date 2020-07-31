@@ -1,4 +1,8 @@
-DEV="/home/tom/dev"
+if [ $(uname) = "Darwin" ]; then
+    DEV="/Users/tom/dev"
+else
+    DEV="/home/tom/dev"
+fi
 STYLEME="${DEV}/styleme"
 
 alias dev="${DEV}"
@@ -9,7 +13,7 @@ alias smm="${STYLEME}/media"
 alias smc="${STYLEME}/contrib"
 alias smf="${STYLEME}/frontend"
 
-alias m="workon styleme; ${STYLEME}/styleme/manage.py"
+alias m="pyenv activate styleme; ${STYLEME}/styleme/manage.py"
 alias mak="m makemigrations"
 alias mig="m migrate"
 

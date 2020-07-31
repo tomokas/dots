@@ -56,5 +56,14 @@ n() {
         rm $NVIM_LISTEN_ADDRESS
     fi
 
-    nvim
+    nvim "${@}"
+}
+
+l() {
+    local TARGET="${1}"
+    if [ -d "${TARGET}" ]; then
+        ls "${TARGET}"
+    elif [ -f "${TARGET}" ]; then
+        less "${TARGET}"
+    fi
 }
