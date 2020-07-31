@@ -31,7 +31,7 @@ grb() {
     git checkout "${BRANCH}"
 }
 
-l() {
+lint() {
     root=$(git rev-parse --show-toplevel)
     files=$(git diff --cached --name-only | grep "\.py" | sed -e "s#.*#${root}/&#" | tr '\n' ' ')
     if [ -n "$files" ]; then
